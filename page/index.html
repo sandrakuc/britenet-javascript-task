@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadania</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</head>
+<body onload="message()">
+<h1>Witaj na stronie!</h1>
+
+<div id="hideAndSeek"></div>
+<button onclick="hideMe()">Pokaż lub zniknij tekst</button><br>
+
+<div>
+    <label>Tu wpisz tylko cyfry i kropki!</label>
+    <input id="numbersAndDots"/>
+    <button onclick="checkInput()">Sprawdź!</button>
+</div><br>
+
+<div id="oneOrTwo"></div><button onclick="boldOne()">Pogrubione Jeden</button><button onclick="normalTwo()">Standardowe Dwa</button>
+
+<div>
+    <label>Czerwony</label><input type="checkbox" id="red" onclick="red()">
+    <label>Niebieski</label><input type="checkbox" id="blue" onclick="blue()" checked>
+    <label>Zielony</label><input type="checkbox" id="green" onclick="green()">
+    <select id="colors" onchange="changeColor()">
+        <option value="red">Czerwony</option>
+        <option value="blue" selected>Niebieski</option>
+        <option value="green">Zielony</option>
+    </select>
+</div><br>
+
+<div>
+    <label>Czerwony</label><input type="checkbox" id="redjq" onclick="redJQ()">
+    <label>Niebieski</label><input type="checkbox" id="bluejq" onclick="blueJQ()" checked>
+    <label>Zielony</label><input type="checkbox" id="greenjq" onclick="greenJQ()">
+    <select id="colorsjq" onchange="changeColorWithJQ()">
+        <option value="red">Czerwony</option>
+        <option value="blue" selected>Niebieski</option>
+        <option value="green">Zielony</option>
+    </select>
+</div><br>
+
+</body>
+
+<script>
+    var hidden = true;
+
+    function message(){
+        alert("Witaj na stronie!");
+    }
+
+    function hideMe() {
+        if(hidden === true){
+            hidden = false;
+            document.getElementById("hideAndSeek").innerHTML = "Akuku!";
+        }else{
+            hidden = true;
+            document.getElementById("hideAndSeek").innerHTML = "";
+        }
+    }
+
+    function checkInput() {
+        var s = document.getElementById("numbersAndDots").value;
+        if(!validate(s)){
+            document.getElementById("numbersAndDots").value = "";
+            alert("Błąd!");
+        }
+    }
+
+    function validate(s) {
+        var rgx = /^[0-9]*\.?[0-9]*$/;
+        return s.match(rgx);
+    }
+
+    function boldOne() {
+        document.getElementById("oneOrTwo").innerHTML = "jeden";
+        document.getElementById("oneOrTwo").style = "font-weight: bold";
+    }
+
+    function normalTwo() {
+        document.getElementById("oneOrTwo").innerHTML = "dwa";
+        document.getElementById("oneOrTwo").style = "font-weight: normal";
+    }
+
+    function green() {
+        document.getElementById("colors").value = "green";
+        document.getElementById("green").checked = true;
+        document.getElementById("blue").checked = false;
+        document.getElementById("red").checked = false;
+    }
+
+    function blue() {
+        document.getElementById("colors").value = "blue";
+        document.getElementById("green").checked = false;
+        document.getElementById("blue").checked = true;
+        document.getElementById("red").checked = false;
+    }
+
+    function red() {
+        document.getElementById("colors").value = "red";
+        document.getElementById("green").checked = false;
+        document.getElementById("blue").checked = false;
+        document.getElementById("red").checked = true;
+    }
+
+    function changeColor() {
+        if(document.getElementById("colors").value == "green"){
+            green();
+        }if (document.getElementById("colors").value == "blue"){
+            blue();
+        }if(document.getElementById("colors").value == "red"){
+            red();
+        }
+    }
+
+    function redJQ() {
+        $("#colorsjq").val("red");
+        $("#redjq").prop("checked", true);
+        $("#bluejq").prop("checked", false);
+        $("#greenjq").prop("checked", false);
+    }
+
+    function blueJQ() {
+        $("#colorsjq").val("blue");
+        $("#redjq").prop("checked", false);
+        $("#bluejq").prop("checked", true);
+        $("#greenjq").prop("checked", false);
+    }
+
+    function greenJQ() {
+        $("#colorsjq").val("green");
+        $("#redjq").prop("checked", false);
+        $("#bluejq").prop("checked", false);
+        $("#greenjq").prop("checked", true);
+    }
+
+    function changeColorWithJQ() {
+        console.log("here i am!");
+        if($("#colorsjq").val() == "red"){
+            redJQ();
+        }if($("#colorsjq").val() == "blue"){
+            blueJQ();
+        }if($("#colorsjq").val() == "green"){
+            greenJQ();
+        }
+    }
+</script>
+</html>
